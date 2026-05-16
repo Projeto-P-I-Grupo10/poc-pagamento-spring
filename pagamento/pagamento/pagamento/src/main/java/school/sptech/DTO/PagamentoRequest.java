@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 public class PagamentoRequest {
 
-    private Long idCurso;
+    private Long idTurma;
 
     private Long idUsuario;
 
@@ -23,12 +23,12 @@ public class PagamentoRequest {
 
     private LocalDateTime dataPagamento;
 
-    public Long getIdCurso() {
-        return idCurso;
+    public Long getIdTurma() {
+        return idTurma;
     }
 
-    public void setIdCurso(Long idCurso) {
-        this.idCurso = idCurso;
+    public void setIdTurma(Long idTurma) {
+        this.idTurma = idTurma;
     }
 
     public Long getIdUsuario() {

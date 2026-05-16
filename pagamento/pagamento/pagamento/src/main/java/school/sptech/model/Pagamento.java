@@ -12,7 +12,7 @@ public class Pagamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long idCurso;
+    private Long idTurma;
     private Long idUsuario;
     private String metodoPagamento;
     private String status;
@@ -35,12 +35,12 @@ public class Pagamento {
         this.id = id;
     }
 
-    public Long getIdCurso() {
-        return idCurso;
+    public Long getIdTurma() {
+        return idTurma;
     }
 
-    public void setIdCurso(Long idCurso) {
-        this.idCurso = idCurso;
+    public void setIdTurma(Long idTurma) {
+        this.idTurma = idTurma;
     }
 
     public Long getIdUsuario() {

@@ -1,7 +1,11 @@
 package school.sptech.controller;
 
+import com.mercadopago.resources.payment.Payment;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import school.sptech.DTO.CartaoResponse;
+import school.sptech.DTO.CartaoResquest;
 import school.sptech.DTO.PagamentoRequest;
 import school.sptech.DTO.PagamentoResponse;
 import school.sptech.model.Pagamento;
@@ -26,7 +30,7 @@ public class PagamentoController {
     @PostMapping("/pix")
     public ResponseEntity<PagamentoResponse> gerarPix(@RequestBody PagamentoRequest body) throws Exception {
             Pagamento pagamento = new Pagamento();
-            pagamento.setIdCurso(body.getIdCurso());
+            pagamento.setIdTurma(body.getIdTurma());
             pagamento.setIdUsuario(body.getIdUsuario());
             pagamento.setMetodoPagamento(body.getMetodoPagamento());
             pagamento.setValor(body.getValor());
@@ -46,36 +50,13 @@ public class PagamentoController {
 
 
 
-//    @PostMapping("/cartao")
-//    public ResponseEntity<Map<String, Object>> realizarPagamento(
-//            @RequestBody @Valid CartaoResquest dto) throws Exception {
-//
-//        PagamentoCartao pagamento = new PagamentoCartao();
-//        pagamento.setIdCurso(dto.getIdCurso());
-//        pagamento.setIdUsuario(dto.getIdUsuario());
-//        pagamento.setMetodoPagamento("credit_card");
-//        pagamento.setStatus("pending");
-//        pagamento.setValor(dto.getValor());
-//        pagamento.setToken(dto.getToken());
-//        pagamento.setParcelas(dto.getParcelas());
-//        pagamento.setBandeira(dto.getPaymentMethodId());
-//        pagamento.setEmailPagador(dto.getEmailPagador());
-//        pagamento.setIssuerId(dto.getIssuerId());
-//        pagamento.setTipoDocumento(dto.getTipoDocumento());
-//        pagamento.setNumeroDocumento(dto.getNumeroDocumento());
-//        pagamento.setDataPagamento(LocalDateTime.now());
-//
-//        Payment resposta = serviceCartao.realizarPagamentoCartao(pagamento);
-//
-//        return ResponseEntity.status(200).body(Map.of(
-//                "id", resposta.getId(),
-//                "status", resposta.getStatus(),
-//                "status_detalhe", resposta.getStatusDetail(),
-//                "valor", resposta.getTransactionAmount(),
-//                "parcelas", resposta.getInstallments(),
-//                "bandeira", resposta.getPaymentMethodId()
-//        ));
-//    }
+    @PostMapping("/cartao")
+    public ResponseEntity<CartaoResponse> realizarPagamento(
+            @RequestBody @Valid CartaoResquest dto) throws Exception {
+
+        return ResponseEntity.status(200).body(service.realizarPagamentoCartao(dto));
+
+    }
 
 
 }

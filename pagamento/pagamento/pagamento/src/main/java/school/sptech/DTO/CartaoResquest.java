@@ -8,7 +8,7 @@ public class CartaoResquest {
 
     @NotNull(message = "ID do curso é obrigatório")
     @Positive(message = "ID do curso deve ser positivo")
-    private Long idCurso;
+    private Long idTurma;
 
     @NotNull(message = "ID do usuário é obrigatório")
     @Positive(message = "ID do usuário deve ser positivo")
@@ -32,8 +32,6 @@ public class CartaoResquest {
     @NotBlank(message = "Issuer é obrigatório")
     private String issuerId;
 
-    @NotBlank(message = "Email do pagador é obrigatório")
-    @Email(message = "Email inválido")
     private String emailPagador;
 
     @NotBlank(message = "Tipo do documento é obrigatório")
@@ -42,12 +40,12 @@ public class CartaoResquest {
     @NotBlank(message = "Número do documento é obrigatório")
     private String numeroDocumento;
 
-    public Long getIdCurso() {
-        return idCurso;
+    public Long getIdTurma() {
+        return idTurma;
     }
 
-    public void setIdCurso(Long idCurso) {
-        this.idCurso = idCurso;
+    public void setIdTurma(Long idTurma) {
+        this.idTurma = idTurma;
     }
 
     public Long getIdUsuario() {

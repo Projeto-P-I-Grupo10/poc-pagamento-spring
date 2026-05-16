@@ -7,7 +7,6 @@ import school.sptech.model.Pagamento;
 import java.util.Optional;
 
 public interface IPagamentoRepository extends JpaRepository<Pagamento,Long> {
-    Optional<Pagamento> findByIdUsuarioAndIdCursoAndStatus(Long idUsuario, Long idCurso, String status);
-    Optional<Pagamento> findByIdCursoAndIdUsuario(Long idCurso, Long idUsuario);
- 
+    Optional<Pagamento> findByIdUsuarioAndIdTurmaAndStatus(Long idUsuario, Long idTurma, String status);
+    Optional<Pagamento> findByIdTurmaAndIdUsuario(Long idTurma, Long idUsuario);
 }
