@@ -2,9 +2,7 @@ package school.sptech.service;
 
 import com.mercadopago.MercadoPagoConfig;
 import com.mercadopago.client.common.IdentificationRequest;
-import com.mercadopago.client.payment.PaymentClient;
-import com.mercadopago.client.payment.PaymentCreateRequest;
-import com.mercadopago.client.payment.PaymentPayerRequest;
+import com.mercadopago.client.payment.*;
 import com.mercadopago.exceptions.MPApiException;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.payment.Payment;
@@ -20,6 +18,8 @@ import school.sptech.repository.IUsuarioRepository;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -113,20 +113,35 @@ public class PagamentoService {
     }
 
     public CartaoResponse realizarPagamentoCartao(CartaoResquest resquest){
-        MercadoPagoConfig.setAccessToken("TEST-5423849464279431-032111-8709bfa0e0241f237b113adb713cfe22-2562961358");
+        MercadoPagoConfig.setAccessToken("TEST-6936305909648195-033017-f170e7d2ebeb6861023ec97a482ae87a-2562961358");
         
         Usuario usuario = usuarioRepository.findById(resquest.getIdUsuario())
                 .orElseThrow(() -> new RuntimeException("usuario não encontrado"));
+
         PaymentClient client = new PaymentClient();
 
         PaymentPayerRequest payer = PaymentPayerRequest.builder()
                 .email(usuario.getEmail())
+                .firstName(usuario.getNome().split(" ")[0])
+                .lastName(usuario.getNome().split(" ").length > 1
+                        ? usuario.getNome().split(" ")[1] : "")
                 .identification(
                         IdentificationRequest.builder()
                                 .type(resquest.getTipoDocumento())
                                 .number(resquest.getNumeroDocumento())
                                 .build()
                 )
+                .build();
+
+        PaymentItemRequest item = PaymentItemRequest.builder()
+                .id(resquest.getIdTurma().toString())
+                .title("Pagamento de curso")
+                .quantity(1)
+                .unitPrice(resquest.getValor())
+                .build();
+
+        PaymentAdditionalInfoRequest additionalInfo = PaymentAdditionalInfoRequest.builder()
+                .items(List.of(item))
                 .build();
 
         PaymentCreateRequest request = PaymentCreateRequest.builder()
@@ -136,6 +151,8 @@ public class PagamentoService {
                 .paymentMethodId(resquest.getPaymentMethodId())
                 .issuerId(resquest.getIssuerId())
                 .description("Pagamento curso")
+                .additionalInfo(additionalInfo)
+                .metadata(Map.of("device_id", resquest.getDeviceId()))
                 .payer(payer)
                 .build();
 

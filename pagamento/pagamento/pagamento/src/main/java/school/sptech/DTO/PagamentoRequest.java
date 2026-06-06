@@ -1,17 +1,17 @@
 package school.sptech.DTO;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class PagamentoRequest {
-
+    @NotNull
     private Long idTurma;
-
+    @NotNull
     private Long idUsuario;
-
     @NotBlank
     private String email;
     @NotBlank
@@ -20,8 +20,6 @@ public class PagamentoRequest {
     private String status;
     @Positive
     private BigDecimal valor;
-
-    private LocalDateTime dataPagamento;
 
     public Long getIdTurma() {
         return idTurma;
@@ -61,14 +59,6 @@ public class PagamentoRequest {
 
     public void setValor(BigDecimal valor) {
         this.valor = valor;
-    }
-
-    public LocalDateTime getDataPagamento() {
-        return dataPagamento;
-    }
-
-    public void setDataPagamento(LocalDateTime dataPagamento) {
-        this.dataPagamento = dataPagamento;
     }
 
     public String getEmail() {

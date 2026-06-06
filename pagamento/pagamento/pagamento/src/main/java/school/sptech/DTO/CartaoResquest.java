@@ -40,6 +40,17 @@ public class CartaoResquest {
     @NotBlank(message = "Número do documento é obrigatório")
     private String numeroDocumento;
 
+    @NotBlank
+    private String deviceId;
+
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+    }
+
     public Long getIdTurma() {
         return idTurma;
     }
