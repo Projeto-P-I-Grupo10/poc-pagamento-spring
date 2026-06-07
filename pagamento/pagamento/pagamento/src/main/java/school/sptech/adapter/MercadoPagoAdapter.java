@@ -114,10 +114,8 @@ public class MercadoPagoAdapter implements GatewayPagamento {
 
             return resposta.getStatus();
 
-        } catch (MPApiException e) {
+        } catch (MPApiException | MPException e) {
             throw new RuntimeException("Erro na API do Mercado Pago ao consultar status", e);
-        } catch (MPException e) {
-            throw new RuntimeException(e);
         }
     }
 
